@@ -1,7 +1,7 @@
 // server.js
 const authRoutes = require('./routes/authRoutes');
-const patientRoutes = require('./routes/PatientRouter');
 
+const bleDataRouter = require('./routes/bleDataRouter');
 
 const express = require('express');
 const cors = require('cors');
@@ -28,7 +28,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 // Your routes will be here
 app.use('/api/auth', authRoutes);
-app.use('/api/patient', patientRoutes);
+
+app.use('/api/ble', bleDataRouter);
 
 
 

@@ -40,6 +40,7 @@ exports.signup = async (req, res) => {
     return res.status(200).json({
       message: 'User registered successfully',
       userId: newUser._id,
+      
       token, 
     });
   } catch (error) {
@@ -68,7 +69,7 @@ exports.login = async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    return res.status(200).json({ message: 'Login successful', token });
+    return res.status(200).json({ message: 'Login successful', token, isLogin: user.isLogin });
   } catch (error) {
     return res.status(500).json({ message: 'Error logging in', error: error.message });
   }
@@ -103,7 +104,11 @@ exports.updateUser = async (req, res) => {
     if (device_details) user.device_details = { ...user.device_details, ...device_details };
 
     await user.save();
+ // Set isLogin to true when updating
+    user.isLogin = true;
 
+    // Save the updated user
+    await user.save();
     return res.status(200).json({ message: 'User updated successfully', user });
   } catch (error) {
     return res.status(500).json({ message: 'Error updating user', error: error.message });
@@ -121,3 +126,5 @@ exports.alluser = async(req,res) =>{
 
   
 };
+
+

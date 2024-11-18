@@ -68,6 +68,10 @@ const userSchema = new mongoose.Schema({
     type: Number,  // Weight in kg
     required: false
   },
+  isLogin: { 
+    type: Boolean, // New boolean field
+    default: false // Default to false initially
+  },
   lifestyle: lifestyleSchema,  // Embedded lifestyle object
   device_details: deviceDetailsSchema,  // Embedded device details object
   created_at: { 
